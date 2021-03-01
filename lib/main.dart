@@ -22,8 +22,16 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            title: Text(
-                "Blog in Flutter"))); //Scaffold can hold other widgets inside
+        appBar: AppBar(title: Text("Blog in Flutter")),
+        body: Column(
+          children: <Widget>[TestWidget(), TestWidget(), TestWidget()],
+        )); //Scaffold can hold other widgets inside
+  }
+}
+
+class TestWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Text("Hello world");
   }
 }
