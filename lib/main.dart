@@ -18,12 +18,21 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  String text = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: Text("Blog in Flutter")),
-        body: TextInputWidget()); //Scaffold can hold other widgets inside
+        body: Column(children: <Widget>[
+          TextInputWidget(),
+          Text(this.text)
+        ])); //Scaffold can hold other widgets inside
   }
 }
 
@@ -34,33 +43,24 @@ class TextInputWidget extends StatefulWidget {
 
 class _TextInputWidgetState extends State<TextInputWidget> {
   final controller = TextEditingController();
-  String text = "";
+
   @override
   void dispose() {
     super.dispose();
     controller.dispose();
   }
 
-  void changeText(text) {
-    if (text == "Hello World!") {
-      controller.clear();
-      text = "";
-    }
-    setState(() {
-      this.text = text;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Column(children: <Widget>[
-      TextField(
+    return TextField(
         controller: this.controller,
         decoration: InputDecoration(
-            prefixIcon: Icon(Icons.message), labelText: "Type Message :"),
-        onChanged: (text) => this.changeText(text),
-      ),
-      Text(this.text)
-    ]);
+            prefixIcon: Icon(Icons.message),
+            labelText: "Type Message :",
+            suffixIcon: IconButton(
+                icon: Icon(Icons.send),
+                tooltip: "Post Message",
+                splashColor: Colors.pink[300],
+                onPressed: () => {})));
   }
 }
